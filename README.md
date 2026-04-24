@@ -1,6 +1,10 @@
 # QuailSpotter
 
-QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**. The project aims to provide bird enthusiasts and researchers with a tool to identify and log quail sightings, specifically focusing on **Coturnix quails**.
+QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**. The project aims to provide backyard quail farmers with a tool to identify quail sex using feather patterns when possible, specifically focusing on **Coturnix quails**.
+
+More information on quail genetics and how various breeds are classified at 
+https://www.pipsnchicks.com/quail-genetics
+<img width="320" height="615" alt="Screenshot_20260424_133446" src="https://github.com/user-attachments/assets/e4c7068a-d579-4c3e-ac10-568f5b9412ab" /><img width="320" height="615" alt="Screenshot_20260424_133307" src="https://github.com/user-attachments/assets/8b7cd3f4-4f17-4e92-bef9-47c68f4e83b8" /><img width="320" height="615" alt="Screenshot_20260424_133143" src="https://github.com/user-attachments/assets/a9f70da8-3172-494e-a3e3-097c091b6fcf" />
 
 ## 🎯 Goals
 
