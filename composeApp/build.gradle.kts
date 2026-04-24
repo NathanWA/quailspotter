@@ -8,22 +8,45 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    kotlin("native.cocoapods")
 }
 
 kotlin {
-    androidTarget {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_11)
-        }
-    }
+    androidTarget()
     
     listOf(
+        iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach { iosTarget ->
-        iosTarget.binaries.framework {
+    )
+
+    cocoapods {
+        summary = "Compose App Module"
+        homepage = "https://github.com/JetBrains/compose-multiplatform"
+        version = "1.0"
+        ios.deploymentTarget = "15.0"
+        framework {
             baseName = "ComposeApp"
             isStatic = true
+        }
+        pod("TensorFlowLiteObjC") {
+            version = "~> 2.14.0"
+            moduleName = "TFLTensorFlowLite"
+            packageName = "cocoapods.TFLTensorFlowLite"
+            extraOpts += listOf("-compiler-option", "-fmodules")
+        }
+        pod("TensorFlowLiteObjC/CoreML") {
+            version = "~> 2.14.0"
+            moduleName = "TFLTensorFlowLite"
+            packageName = "cocoapods.TFLTensorFlowLiteCoreML"
+        }
+        pod("TensorFlowLiteObjC/Metal") {
+            version = "~> 2.14.0"
+            moduleName = "TFLTensorFlowLite"
+            packageName = "cocoapods.TFLTensorFlowLiteMetal"
+        }
+        pod("TensorFlowLiteC") {
+            version = "~> 2.14.0"
         }
     }
     
@@ -57,6 +80,13 @@ kotlin {
     }
 }
 
+compose {
+    resources {
+        packageOfResClass = "com.nathan.quailspotter"
+        generateResClass = always
+    }
+}
+
 android {
     namespace = "com.nathan.quailspotter"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
@@ -81,6 +111,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlin {
+        jvmToolchain(11)
     }
 }
 

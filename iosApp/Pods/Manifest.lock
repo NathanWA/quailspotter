@@ -1,0 +1,45 @@
+PODS:
+  - composeApp (1.0):
+    - TensorFlowLiteC (~> 2.14.0)
+    - TensorFlowLiteObjC (~> 2.14.0)
+    - TensorFlowLiteObjC/CoreML (~> 2.14.0)
+    - TensorFlowLiteObjC/Metal (~> 2.14.0)
+  - TensorFlowLiteC (2.14.0):
+    - TensorFlowLiteC/Core (= 2.14.0)
+  - TensorFlowLiteC/Core (2.14.0)
+  - TensorFlowLiteC/CoreML (2.14.0):
+    - TensorFlowLiteC/Core
+  - TensorFlowLiteC/Metal (2.14.0):
+    - TensorFlowLiteC/Core
+  - TensorFlowLiteObjC (2.14.0):
+    - TensorFlowLiteObjC/Core (= 2.14.0)
+  - TensorFlowLiteObjC/Core (2.14.0):
+    - TensorFlowLiteC (= 2.14.0)
+  - TensorFlowLiteObjC/CoreML (2.14.0):
+    - TensorFlowLiteC/CoreML (= 2.14.0)
+    - TensorFlowLiteObjC/Core (= 2.14.0)
+  - TensorFlowLiteObjC/Metal (2.14.0):
+    - TensorFlowLiteC/Metal (= 2.14.0)
+    - TensorFlowLiteObjC/Core (= 2.14.0)
+
+DEPENDENCIES:
+  - composeApp (from `../composeApp`)
+  - TensorFlowLiteObjC (~> 2.14.0)
+
+SPEC REPOS:
+  trunk:
+    - TensorFlowLiteC
+    - TensorFlowLiteObjC
+
+EXTERNAL SOURCES:
+  composeApp:
+    :path: "../composeApp"
+
+SPEC CHECKSUMS:
+  composeApp: b263c30a66c373c501057635064f21fa85185329
+  TensorFlowLiteC: a836de9b6e6018665ccc349538bdd2c3b80dd7a5
+  TensorFlowLiteObjC: d2f4f4b543a733b0a3efb19904ffb1da267fa002
+
+PODFILE CHECKSUM: 6528bc758b3a260128bab8ececa0e01ad8e25226
+
+COCOAPODS: 1.16.2

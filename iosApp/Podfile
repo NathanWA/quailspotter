@@ -1,0 +1,9 @@
+platform :ios, '15.0'
+
+target 'iosApp' do
+  use_frameworks!
+
+  pod 'TensorFlowLiteObjC/CoreML', '~> 2.14.0'
+  pod 'TensorFlowLiteObjC/Metal', '~> 2.14.0'
+  pod 'composeApp', :path => '../composeApp'
+end
