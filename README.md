@@ -1,13 +1,19 @@
 # QuailSpotter
 
-QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**. The project aims to provide bird enthusiasts and researchers with a tool to identify and log quail sightings, specifically focusing on **Coturnix quails**.
+QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**. The project aims to provide backyard quail farmers with a tool to identify quail sex using feather patterns when possible, specifically focusing on **Coturnix quails**.
+
+Using feather patterns to sex quails at approximately four weeks of age provides advantages to quail farmers over waiting for sexual maturity. 
+However, other genes can mask the traits, making some breeds difficult or impossible. 
+
+More information on quail genetics and how various breeds are classified at 
+https://www.pipsnchicks.com/quail-genetics
+<img width="320" height="615" alt="Screenshot_20260424_133307" src="https://github.com/user-attachments/assets/8b7cd3f4-4f17-4e92-bef9-47c68f4e83b8" /><img width="320" height="615" alt="Screenshot_20260424_133143" src="https://github.com/user-attachments/assets/a9f70da8-3172-494e-a3e3-097c091b6fcf" />
 
 ## 🎯 Goals
 
-- **Automated Identification**: Use on-device Machine Learning (TensorFlow Lite) to identify the sex and species of quails from images.
-- **Sightings Logger**: Enable users to log sightings with timestamps, locations, and categorical notes.
+- **Automated Identification**: Use on-device Machine Learning (TensorFlow Lite) to identify the sex of quails from images.
 - **Cross-Platform Consistency**: Provide a unified experience across Android and iOS using a shared codebase for both UI and business logic.
-- **On-Device Processing**: Ensure all image classification happens locally on the device for privacy and offline capability.
+- **On-Device Processing**: Ensure all image classification happens locally on the device for speed and offline capability.
 
 ## 🛠️ Implementation
 
@@ -28,14 +34,6 @@ QuailSpotter is a cross-platform mobile application built with **Kotlin Multipla
     - `domain/QuailDetector`: The bridge between the raw image data and the TFLite interpreter.
     - `domain/ImageProcessor`: Handles image resizing and normalization for the ML model.
 - **`iosApp`**: The native iOS wrapper that launches the Compose Multiplatform framework.
-
-## 🎨 App Icon
-The app features a custom-designed silhouette of a **Coturnix quail** (plump, no head plume, side profile) centered within a "spotter" viewfinder, reflecting the core purpose of the application.
-
-- **Background**: Forest Green (`#2E7D32`)
-- **Foreground**: Light Brown (`#D7CCC8`)
-
----
 
 ## 🚀 Getting Started
 
