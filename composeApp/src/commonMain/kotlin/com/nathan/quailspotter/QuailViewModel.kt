@@ -2,6 +2,7 @@ package com.nathan.quailspotter
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.nathan.quailspotter.domain.QuailAnalysisResult
 import com.nathan.quailspotter.domain.QuailDetection
 import com.nathan.quailspotter.domain.QuailDetector
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,6 +18,7 @@ class QuailViewModel : ViewModel() {
     val uiState: StateFlow<QuailUiState> = _uiState.asStateFlow()
 
     private var detector: QuailDetector? = null
+    private val aiAnalyzer = QuailAiAnalyzer(apiKey = BuildKonfig.OPENAI_API_KEY)
 
     init {
         viewModelScope.launch {
@@ -36,7 +38,9 @@ class QuailViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(
             capturedImage = imageBytes,
             appState = AppState.RESULT,
-            detections = emptyList()
+            detections = emptyList(),
+            aiAnalysisResult = null,
+            aiError = null
         )
         processImage(imageBytes)
     }
@@ -64,7 +68,35 @@ class QuailViewModel : ViewModel() {
     }
 
     fun onNavigateToCamera() {
-        _uiState.value = _uiState.value.copy(appState = AppState.CAMERA)
+        _uiState.value = _uiState.value.copy(
+            appState = AppState.CAMERA,
+            aiAnalysisResult = null,
+            aiError = null
+        )
+    }
+
+    fun onAnalyzeWithAi() {
+        val imageBytes = uiState.value.capturedImage ?: return
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(
+                isAiProcessing = true, 
+                aiAnalysisResult = null,
+                aiError = null
+            )
+            try {
+                val result = aiAnalyzer.analyzeQuailImage(imageBytes)
+                _uiState.value = _uiState.value.copy(
+                    aiAnalysisResult = result,
+                    isAiProcessing = false
+                )
+            } catch (e: Exception) {
+                println("ViewModel: AI Analysis error: ${e.message}")
+                _uiState.value = _uiState.value.copy(
+                    isAiProcessing = false,
+                    aiError = e.message ?: "Unknown error occurred during AI analysis"
+                )
+            }
+        }
     }
 
     override fun onCleared() {
@@ -81,5 +113,8 @@ data class QuailUiState(
     val appState: AppState = AppState.HOME,
     val capturedImage: ByteArray? = null,
     val detections: List<QuailDetection> = emptyList(),
-    val isProcessing: Boolean = false
+    val isProcessing: Boolean = false,
+    val aiAnalysisResult: QuailAnalysisResult? = null,
+    val isAiProcessing: Boolean = false,
+    val aiError: String? = null
 )
