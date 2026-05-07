@@ -1,6 +1,3 @@
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import java.util.Properties
 
 plugins {
@@ -76,12 +73,23 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
 
+        val androidUnitTest by getting {
+            dependencies {
+                implementation(libs.kotlin.testJunit)
+                implementation(libs.junit)
+                implementation(libs.robolectric)
+                implementation(libs.compose.ui.test.junit4)
+                runtimeOnly(libs.compose.ui.test.manifest)
+            }
+        }
+
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
         }
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.compose.ui.test)
         }
     }
 }
@@ -114,12 +122,17 @@ android {
             isMinifyEnabled = false
         }
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlin {
-        jvmToolchain(11)
+        jvmToolchain(17)
     }
 }
 
@@ -141,4 +154,5 @@ buildkonfig {
 
 dependencies {
     debugImplementation(libs.compose.uiTooling)
+    debugRuntimeOnly(libs.compose.ui.test.manifest)
 }

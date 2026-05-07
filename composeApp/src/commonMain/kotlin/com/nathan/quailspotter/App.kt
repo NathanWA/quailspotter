@@ -40,6 +40,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTag
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.drawText
 import androidx.compose.ui.text.font.FontStyle
@@ -195,8 +198,8 @@ fun MainContent(
         ) {
             Button(
                 onClick = onAiDeepScan,
-                enabled = uiState.detections.isNotEmpty() && !uiState.isAiProcessing,
-                modifier = Modifier.fillMaxWidth(),
+                enabled = uiState.capturedImage != null && !uiState.isProcessing && !uiState.isAiProcessing,
+                modifier = Modifier.fillMaxWidth().testTag("ai_deep_scan_button"),
                 shape = MaterialTheme.shapes.medium
             ) {
                 if (uiState.isAiProcessing) {
@@ -219,10 +222,26 @@ fun MainContent(
                     .fillMaxWidth()
                     .verticalScroll(rememberScrollState())
             ) {
+                if (uiState.aiError != null) {
+                    Card(
+                        modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp).testTag("ai_error_card"),
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.errorContainer
+                        )
+                    ) {
+                        Text(
+                            text = uiState.aiError,
+                            modifier = Modifier.padding(12.dp),
+                            color = MaterialTheme.colorScheme.onErrorContainer,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
+                }
+
                 val aiResult = uiState.aiAnalysisResult
                 if (aiResult != null) {
                     Card(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier.fillMaxWidth().testTag("ai_result_card"),
                         colors = CardDefaults.cardColors(
                             containerColor = MaterialTheme.colorScheme.surfaceVariant
                         )
