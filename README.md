@@ -7,13 +7,15 @@ However, other genes can mask the traits, making some breeds difficult or imposs
 
 More information on quail genetics and how various breeds are classified at 
 https://www.pipsnchicks.com/quail-genetics
+
 <img width="320" height="615" alt="Screenshot_20260424_133307" src="https://github.com/user-attachments/assets/8b7cd3f4-4f17-4e92-bef9-47c68f4e83b8" /><img width="320" height="615" alt="Screenshot_20260424_133143" src="https://github.com/user-attachments/assets/a9f70da8-3172-494e-a3e3-097c091b6fcf" />
 
 ## 🎯 Goals
 
 - **Automated Identification**: Use on-device Machine Learning (TensorFlow Lite) to identify the sex of quails from images.
+- **AI Deep Scan**: Leveraging cloud-based LLMs (OpenAI) for advanced genetic analysis and reasoning when feather patterns are complex. The Deep Scan button is available whenever an image is captured, enabling detailed insights even if local detection returns no results.
 - **Cross-Platform Consistency**: Provide a unified experience across Android and iOS using a shared codebase for both UI and business logic.
-- **On-Device Processing**: Ensure all image classification happens locally on the device for speed and offline capability.
+- **Hybrid Processing**: Balancing local TFLite detection for speed with optional cloud analysis for higher accuracy and detailed insights.
 
 ## 🛠️ Implementation
 
@@ -21,18 +23,23 @@ https://www.pipsnchicks.com/quail-genetics
 - **UI Framework**: [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) for a shared UI across Android and iOS.
 - **Language**: Kotlin 2.0+ with Kotlin Multiplatform.
 - **Machine Learning**: 
-    - **TensorFlow Lite (TFLite)**: The core engine for quail detection.
-    - **Native Interop**: Uses the `TensorFlowLiteObjC` Pod for iOS and the `kflite` library for Android to run a shared `.tflite` model.
+    - **TensorFlow Lite (TFLite)**: Local engine for real-time quail detection.
+    - **OpenAI API**: Used for the "Deep Scan" feature to provide genetic reasoning and breed identification.
+- **Testing**:
+    - **Compose UI Test**: Cross-platform UI testing framework for verifying UI interactions and application logic.
+    - **Robolectric**: Enables running Android UI tests on the JVM for fast and reliable local verification.
 - **Image Handling**: [Peekaboo](https://github.com/onseok/peekaboo) for cross-platform image picking and camera access.
 - **Dependency Management**: CocoaPods for iOS native dependencies (TFLite) and Gradle for the shared Kotlin code.
 
 ### Project Structure
 - **`:composeApp`**: Contains the shared Compose UI code and platform-specific entry points.
-    - `commonMain`: Shared UI components and ViewModels.
-    - `androidMain` / `iosMain`: Platform-specific integrations (e.g., AppContext initialization).
+    - `commonMain`: Shared UI components, ViewModels, and App state management.
+    - `androidUnitTest`: JUnit 4 and Robolectric tests for UI verification, including button logic and AI scan timeouts.
+    - `androidMain` / `iosMain`: Platform-specific integrations.
 - **`:shared`**: Contains the core business logic and domain models.
-    - `domain/QuailDetector`: The bridge between the raw image data and the TFLite interpreter.
-    - `domain/ImageProcessor`: Handles image resizing and normalization for the ML model.
+    - `domain/QuailDetector`: Bridge to the TFLite interpreter.
+    - `domain/QuailAiAnalyzer`: Integration with OpenAI for advanced analysis.
+    - `domain/ImageProcessor`: Handles image resizing and normalization.
 - **`iosApp`**: The native iOS wrapper that launches the Compose Multiplatform framework.
 
 ## 🚀 Getting Started
@@ -41,12 +48,19 @@ https://www.pipsnchicks.com/quail-genetics
 - Android Studio (latest version)
 - Xcode (for iOS development)
 - CocoaPods (`brew install cocoapods`)
+- **OpenAI API Key**: Add `openai.api.key=your_key_here` to your `local.properties` file.
 
 ### Build and Run
 
 #### Android
 ```shell
 ./gradlew :composeApp:assembleDebug
+```
+
+#### Running Tests
+Verify the UI and logic using the automated test suite:
+```shell
+./gradlew :composeApp:testDebugUnitTest
 ```
 
 #### iOS
