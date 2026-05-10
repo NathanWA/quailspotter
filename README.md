@@ -1,6 +1,8 @@
 # QuailSpotter
 
-QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform**. The project aims to provide backyard quail farmers with a tool to identify quail sex using feather patterns when possible, specifically focusing on **Coturnix quails**.
+QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform** integrating both an offline ML model using TensorFlowLite and LLM Integration.  
+
+The project aims to provide backyard quail farmers with a tool to identify quail sex using feather patterns when possible, specifically focusing on **Coturnix quails**.
 
 Using feather patterns to sex quails at approximately four weeks of age provides advantages to quail farmers over waiting for sexual maturity. 
 However, other genes can mask the traits, making some breeds difficult or impossible. 
