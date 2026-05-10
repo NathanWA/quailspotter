@@ -1,6 +1,6 @@
 # QuailSpotter
 
-QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform** integrating both an offline ML model using TensorFlowLite and LLM Integration.  
+QuailSpotter is a cross-platform mobile application built with **Kotlin Multiplatform (KMP)** and **Compose Multiplatform** integrating both an **offline ML model using TensorFlowLite** and **LLM Integration**.  
 
 The project aims to provide backyard quail farmers with a tool to identify quail sex using feather patterns when possible, specifically focusing on **Coturnix quails**.
 
