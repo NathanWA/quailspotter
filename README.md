@@ -10,6 +10,11 @@ However, other genes can mask the traits, making some breeds difficult or imposs
 More information on quail genetics and how various breeds are classified at 
 https://www.pipsnchicks.com/quail-genetics
 
+
+https://github.com/user-attachments/assets/55276dab-4f15-4ecd-b121-d9a1c386571f
+
+
+
 <img width="320" height="615" alt="Screenshot_20260424_133307" src="https://github.com/user-attachments/assets/8b7cd3f4-4f17-4e92-bef9-47c68f4e83b8" /><img width="320" height="615" alt="Screenshot_20260424_133143" src="https://github.com/user-attachments/assets/a9f70da8-3172-494e-a3e3-097c091b6fcf" />
 
 ## 🎯 Goals
